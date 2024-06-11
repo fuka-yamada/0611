@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>確認画面</title>
+</head>
+<body>
+    <action="./chik.php" method="get">
+ <!--この下に置き換え用の文字列を準備する-->
+        入場日：
+        <p>!dat!</p>
+        入場時間：
+        <p>!time!</p>
+        枚数選択:
+        <P>!mai!</p>
+        購入者氏名：
+        <p>!name!</p>
+        フリガナ：
+        <P>!furi!</P>
+        電話番号：
+        <p>!phone!</p>
+        性別：
+        <p>!gender!</p>
+        生年月日:
+        <p>!birthday!</p>
+        都道府県：
+        <p>!prefecture!</p>
+
+        
+    <form action="http://localhost/phpmyadmin/index.php?route=/sql&db=akua&table=user&pos=0" method="post">
+            <!-- 他のフォーム要素をここに追加 -->
+            <input type="submit" name="" value="削除">
+            <input type="submit" name="send" value="編集">
+        </form>
+</body>
+</html>
