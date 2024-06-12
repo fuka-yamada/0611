@@ -1,24 +1,32 @@
- 
- 
- <!--この下に置き換え用の文字列を準備する-->
-        
- <!-- レイアウト変更 できる場所-->
-        <p>入場日：!dat! 入場時間：!time! 枚数選択:!mai!</p>
-        
-        <p>購入者氏名：!name!</p>
-        
-        <P>フリガナ：!furi!</P>
-        
-        <p>電話番号：!phone!</p>
-        
-        <p>性別：!gender!</p>
-        
-        <p>生年月日:!birthday!</p>
-        
-        <p>都道府県：!prefecture!</p>
-        
-        <form action="http://localhost/phpmyadmin/index.php?route=/sql&db=akua&table=user&pos=0" method="post">
-            <!-- 他のフォーム要素をここに追加 -->
-            <button type="button" onclick="history.back()">削除</button>
-            <input type="submit" name="send" value="編集">
-        </form>
+<!--この下に置き換え用の文字列を準備する-->
+
+<!-- レイアウト変更 できる場所-->
+<p>入場日：!dat! 入場時間：!time! 枚数選択:!mai!</p>
+
+<p>購入者氏名：!name!</p>
+
+<P>フリガナ：!furi!</P>
+
+<p>電話番号：!phone!</p>
+
+<p>性別：!gender!</p>
+
+<p>生年月日:!birthday!</p>
+
+<p>都道府県：!prefecture!</p>
+
+<form action="kanrisha.php" method="post">
+    <!-- 他のフォーム要素をここに追加 -->
+    
+
+    <input type="submit" value="削除">
+    <input type="hidden" name="mode" value="delete">
+    <input type="hidden" name="id" value="!id!">
+
+    <input type="submit" value="編集">
+    <input type="hidden" name="mode" value="update">
+    <input type="hidden" name="na" value="!na!">
+
+
+
+</form>

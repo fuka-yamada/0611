@@ -31,7 +31,7 @@ foreach($origin as $key=>$value){
 try {
     $dbh = new PDO($dsn, $user, $pass);
 
-    echo "接続しました。";
+    echo "ありがとうございました。";
     register();
 } catch (PDOException $e) {
     echo "エラー内容：" .$e->getMessage();
