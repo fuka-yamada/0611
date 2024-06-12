@@ -28,25 +28,14 @@ foreach($origin as $key=>$value){
 }
 
 //データベースへ接続
-try {
-    $dbh = new PDO($dsn, $user, $pass);
-    
-    if(isset($input["mode"])){
-        
-        if($input["mode"] == "delete"){
-            delete();//削除処理  
-        }elseif($input["mode"] == "update"){
-            update();
-        }
-       
-        
+if (isset($input["mode"])) {
+    if ($input["mode"] == "delete") {
+        delete();//削除処理  
+    } elseif ($input["mode"] == "edit") {
+        edit();
+    } elseif ($input["mode"] == "update") {
+        update();
     }
-    echo "管理者が接続しています。<br>";
-    display();
-
-    //register();
-} catch (PDOException $e) {
-    echo "管理者の接続がエラーになっています。<br>" . $e->getMessage();
 }
 
 
@@ -67,8 +56,8 @@ sql;
     $block = "";
 
     //テンプレート
-    $fh = fopen("play.tmpl", "r+"); //読み込みモード
-    $fs = filesize("play.tmpl"); //ファイルサイズを調べる（のちのfread関数で
+    $fh = fopen("../tmpl/play.tmpl", "r+"); //読み込みモード
+    $fs = filesize("../tmpl/play.tmpl"); //ファイルサイズを調べる（のちのfread関数で
     $kakuni_tmpl = fread($fh, $fs); //ファイルの読み込みを行う
     fclose($fh);
 
@@ -137,24 +126,47 @@ sql;
 
 }
 
-function update(){
+function edit()
+{
     global $dbh;
     global $input;
 
-    $sql=<<<sql
+    $id = $input["id"];
+    $sql = "SELECT * FROM user WHERE id = ?";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute([$id]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    update user set age=dat where; 
+    if ($user) {
+        echo '<form action="kanrisha.php" method="post">';
+        echo '<input type="hidden" name="id" value="' . htmlspecialchars($user["id"], ENT_QUOTES, 'UTF-8') . '">';
+        echo '入場日: <input type="text" name="dat" value="' . htmlspecialchars($user["dat"], ENT_QUOTES, 'UTF-8') . '"><br>';
+        echo '入場時間: <input type="text" name="time" value="' . htmlspecialchars($user["time"], ENT_QUOTES, 'UTF-8') . '"><br>';
+        echo '枚数選択: <input type="text" name="mai" value="' . htmlspecialchars($user["mai"], ENT_QUOTES, 'UTF-8') . '"><br>';
+        // 他のフィールドも同様に追加
+        echo '<input type="hidden" name="mode" value="update">';
+        echo '<input type="submit" value="更新">';
+        echo '</form>';
+    }
+}
 
+function update()
+{
+    global $dbh;
+    global $input;
+
+    $sql = <<<sql
+    UPDATE user SET dat = ?, time = ?, mai = ? WHERE id = ?
 sql;
-$stmt=$dbh->prepare($sql);
+    $stmt = $dbh->prepare($sql);
+    $stmt->bindParam(1, $input["dat"]);
+    $stmt->bindParam(2, $input["time"]);
+    $stmt->bindParam(3, $input["mai"]);
+    $stmt->bindParam(4, $input["id"]);
+    $stmt->execute();
 
-$stmt->bindParam(1,$input["dat"]);
-$stmt->bindParam(2,$input["time"]);
-$stmt->bindParam(3,$input["mai"]);
-$stmt->execute();
-
-
-
+    echo "データが更新されました。<br>";
+    display(); // 更新後に一覧を再表示
 }
    
 
