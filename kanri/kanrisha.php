@@ -37,6 +37,7 @@ try {
             delete();//削除処理  
         }elseif($input["mode"] == "update"){
             update();
+            
         }
        
         
