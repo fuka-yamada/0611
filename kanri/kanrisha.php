@@ -35,8 +35,8 @@ try {
     if (isset($input["mode"])) {
         if ($input["mode"] == "delete") {
             delete();
-        } elseif ($input["mode"] == "edit") {
-            edit();
+        } elseif ($input["mode"] == "update") {
+            update();
         } 
     }
 
@@ -130,31 +130,6 @@ sql;
     echo "データが削除されました。<br>";
 }
 
-function edit()
-{
-    global $dbh;
-    global $input;
-
-    $id = $input["id"];
-    $sql = "SELECT * FROM user WHERE id = ?";
-    $stmt = $dbh->prepare($sql);
-    $stmt->execute([$id]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if ($user) {
-        echo '<form action="kanrisha.php" method="post">';
-        echo '<input type="hidden" name="id" value="' . htmlspecialchars($user["ID"], ENT_QUOTES, 'UTF-8') . '">';
-        echo '入場日: <input type="date" name="dat" value="' . htmlspecialchars($user["dat"], ENT_QUOTES, 'UTF-8') . '"><br>';
-        echo '入場時間: <input type="time" name="time" value="' . htmlspecialchars($user["time"], ENT_QUOTES, 'UTF-8') . '"><br>';
-        echo '枚数選択: <input type="number" name="mai" value="' . htmlspecialchars($user["mai"], ENT_QUOTES, 'UTF-8') . '"><br>';
-        // 他のフィールドも同様に追加
-        echo '<input type="hidden" name="mode" value="update">';
-        echo '<input type="submit" value="更新">';
-        echo '</form>';
-    }
-    update();
-
-}
 
 function update()
 {
