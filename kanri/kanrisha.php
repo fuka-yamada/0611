@@ -28,16 +28,25 @@ foreach($origin as $key=>$value){
 }
 
 //データベースへ接続
-
-if (isset($input["mode"])) {
-    if ($input["mode"] == "delete") {
-        delete();//削除処理  
-    } elseif ($input["mode"] == "edit") {
-        edit();
-    } elseif ($input["mode"] == "update") {
-        update();
-
+try {
+    $dbh = new PDO($dsn, $user, $pass);
+    
+    if (isset($input["mode"])) {
+        if ($input["mode"] == "delete") {
+            delete();
+        } elseif ($input["mode"] == "edit") {
+            edit();
+        } elseif ($input["mode"] == "update") {
+            update();
+    
+        }
     }
+    echo "管理者が接続しています。<br>";
+    display();
+
+    //register();
+} catch (PDOException $e) {
+    echo "管理者の接続がエラーになっています。<br>" . $e->getMessage();
 }
 
 
@@ -97,8 +106,8 @@ sql;
 
     }
 
-    $fh = fopen("reserve.html", "r+");
-    $fs = filesize("reserve.html");
+    $fh = fopen("../tmpl/reserve.html", "r+");
+    $fs = filesize("../tmpl/reserve.html");
     $top = fread($fh,$fs);
     fclose($fh);
 
@@ -121,6 +130,7 @@ function delete(){
     $sql=<<<sql
     update user set flag=0 where id=?;
 sql;
+
     $stmt=$dbh->prepare($sql);
 
       $stmt->bindParam(1,$input["id"]);
@@ -141,10 +151,10 @@ function edit()
 
     if ($user) {
         echo '<form action="kanrisha.php" method="post">';
-        echo '<input type="hidden" name="id" value="' . htmlspecialchars($user["id"], ENT_QUOTES, 'UTF-8') . '">';
-        echo '入場日: <input type="text" name="dat" value="' . htmlspecialchars($user["dat"], ENT_QUOTES, 'UTF-8') . '"><br>';
-        echo '入場時間: <input type="text" name="time" value="' . htmlspecialchars($user["time"], ENT_QUOTES, 'UTF-8') . '"><br>';
-        echo '枚数選択: <input type="text" name="mai" value="' . htmlspecialchars($user["mai"], ENT_QUOTES, 'UTF-8') . '"><br>';
+        // echo '<input type="hidden" name="id" value="' . htmlspecialchars($user["id"], ENT_QUOTES, 'UTF-8') . '">';
+        echo '入場日: <input type="date" name="dat" value="' . htmlspecialchars($user["dat"], ENT_QUOTES, 'UTF-8') . '"><br>';
+        echo '入場時間: <input type="time" name="time" value="' . htmlspecialchars($user["time"], ENT_QUOTES, 'UTF-8') . '"><br>';
+        echo '枚数選択: <input type="number" name="mai" value="' . htmlspecialchars($user["mai"], ENT_QUOTES, 'UTF-8') . '"><br>';
         // 他のフィールドも同様に追加
         echo '<input type="hidden" name="mode" value="update">';
         echo '<input type="submit" value="更新">';
