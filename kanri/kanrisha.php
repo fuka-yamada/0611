@@ -1,82 +1,79 @@
 <?php
+session_start();
 echo "予約情報一覧画面表示。<br>";
 
-//データベースへのログイン情報
+// データベースへのログイン情報
 $dsn = "mysql:host=localhost;dbname=akua;charset=utf8";
 $user = "testuser";
 $pass = "testpass";
 
-$origin=[];//ここに、処理前のデータが入る
-if(isset($_SESSION)){
-    $origin+=$_SESSION;//$originに処理前のGETデータを入れる
+$origin = []; // ここに、処理前のデータが入る
+if (isset($_SESSION)) {
+    $origin += $_SESSION; // $originに処理前のGETデータを入れる
 }
-if(isset($_POST)){
-    $origin+=$_POST;//$originに処理前のGETデータを入れる
-}
-
-//文字コードとhtmlエンティティズの処理を繰り返し行う
-foreach($origin as $key=>$value){
-    //文字コードを処理
-    $mb_code=mb_detect_encoding($value);
-    $value=mb_convert_encoding($value,"utf-8",$mb_code);
-
-    //htmlエンティティズ処理
-    $value=htmlentities($value,ENT_QUOTES);
-
-    //処理が終わったデータを、＄inputに入れなおす
-    $input[$key]=$value;
+if (isset($_POST)) {
+    $origin += $_POST; // $originに処理前のGETデータを入れる
 }
 
-//データベースへ接続
+// 文字コードとhtmlエンティティズの処理を繰り返し行う
+foreach ($origin as $key => $value) {
+    // 文字コードを処理
+    $mb_code = mb_detect_encoding($value);
+    $value = mb_convert_encoding($value, "utf-8", $mb_code);
+
+    // htmlエンティティズ処理
+    $value = htmlentities($value, ENT_QUOTES);
+
+    // 処理が終わったデータを、$inputに入れなおす
+    $input[$key] = $value;
+}
+
+// データベースへ接続
 try {
     $dbh = new PDO($dsn, $user, $pass);
-    
+
     if (isset($input["mode"])) {
         if ($input["mode"] == "delete") {
             delete();
         } elseif ($input["mode"] == "edit") {
             edit();
-        } elseif ($input["mode"] == "update") {
-            update();
-    
-        }
+        } 
     }
+
     echo "管理者が接続しています。<br>";
     display();
 
-    //register();
+    // register();
 } catch (PDOException $e) {
     echo "管理者の接続がエラーになっています。<br>" . $e->getMessage();
 }
 
-
 function display()
 {
-    //基本処理で定義した変数を使えるように
+    // 基本処理で定義した変数を使えるように
     global $dbh;
     global $input;
 
     $sql = <<<sql
     select * from user where flag=1;
-
 sql;
     $us = $dbh->prepare($sql);
     $us->execute();
 
-    //$blockがテキストかつ中身がないことを定義する
+    // $blockがテキストかつ中身がないことを定義する
     $block = "";
 
-    //テンプレート
-    $fh = fopen("../tmpl/play.tmpl", "r+"); //読み込みモード
-    $fs = filesize("../tmpl/play.tmpl"); //ファイルサイズを調べる（のちのfread関数で
-    $kakuni_tmpl = fread($fh, $fs); //ファイルの読み込みを行う
+    // テンプレート
+    $fh = fopen("../tmpl/play.tmpl", "r+"); // 読み込みモード
+    $fs = filesize("../tmpl/play.tmpl"); // ファイルサイズを調べる（のちのfread関数で
+    $kakuni_tmpl = fread($fh, $fs); // ファイルの読み込みを行う
     fclose($fh);
 
     while ($row = $us->fetch()) {
-        //差し込み用テンプレートを初期化する
+        // 差し込み用テンプレートを初期化する
         $insert = $kakuni_tmpl;
 
-        //データベースの値を、PHPで使用する値として、変数に入れなおす
+        // データベースの値を、PHPで使用する値として、変数に入れなおす
         $dat = $row["dat"];
         $time = $row["time"];
         $mai = $row["mai"];
@@ -88,11 +85,10 @@ sql;
         $prefecture = $row["prefecture"];
         $id = $row["ID"];
 
-
-        //テンプレートファイルの文字置き換え
+        // テンプレートファイルの文字置き換え
         $insert = str_replace("!dat!", $dat, $insert);
         $insert = str_replace("!time!", $time, $insert);
-        $insert = str_replace("!mai!", $mai, $insert); 
+        $insert = str_replace("!mai!", $mai, $insert);
         $insert = str_replace("!name!", $name, $insert);
         $insert = str_replace("!furi!", $furi, $insert);
         $insert = str_replace("!phone!", $phone, $insert);
@@ -101,41 +97,37 @@ sql;
         $insert = str_replace("!prefecture!", $prefecture, $insert);
         $insert = str_replace("!id!", $id, $insert);
 
-
-        $block.= $insert; //
-
+        $block .= $insert; //
     }
 
     $fh = fopen("../tmpl/reserve.html", "r+");
     $fs = filesize("../tmpl/reserve.html");
-    $top = fread($fh,$fs);
+    $top = fread($fh, $fs);
     fclose($fh);
 
-
-    //!block!に$blockを差し込む
+    // !block!に$blockを差し込む
     $top = str_replace("!block!", $block, $top);
 
-    //すべてを差し替えたデータをブラウザ表示
+    // すべてを差し替えたデータをブラウザ表示
     echo $top;
-   
 }
 
-//userテーブルに入っている情報を削除。
-
-function delete(){
+function delete()
+{
     global $dbh;
     global $input;
 
-    //sql文を用意
-    $sql=<<<sql
+    // sql文を用意
+    $sql = <<<sql
     update user set flag=0 where id=?;
 sql;
 
-    $stmt=$dbh->prepare($sql);
+    $stmt = $dbh->prepare($sql);
 
-      $stmt->bindParam(1,$input["id"]);
-      $stmt->execute();
+    $stmt->bindParam(1, $input["id"]);
+    $stmt->execute();
 
+    echo "データが削除されました。<br>";
 }
 
 function edit()
@@ -151,7 +143,7 @@ function edit()
 
     if ($user) {
         echo '<form action="kanrisha.php" method="post">';
-        // echo '<input type="hidden" name="id" value="' . htmlspecialchars($user["id"], ENT_QUOTES, 'UTF-8') . '">';
+        echo '<input type="hidden" name="id" value="' . htmlspecialchars($user["ID"], ENT_QUOTES, 'UTF-8') . '">';
         echo '入場日: <input type="date" name="dat" value="' . htmlspecialchars($user["dat"], ENT_QUOTES, 'UTF-8') . '"><br>';
         echo '入場時間: <input type="time" name="time" value="' . htmlspecialchars($user["time"], ENT_QUOTES, 'UTF-8') . '"><br>';
         echo '枚数選択: <input type="number" name="mai" value="' . htmlspecialchars($user["mai"], ENT_QUOTES, 'UTF-8') . '"><br>';
@@ -160,6 +152,8 @@ function edit()
         echo '<input type="submit" value="更新">';
         echo '</form>';
     }
+    update();
+
 }
 
 function update()
@@ -180,6 +174,4 @@ sql;
     echo "データが更新されました。<br>";
     display(); // 更新後に一覧を再表示
 }
-   
-
-   
+?>
