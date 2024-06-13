@@ -5,9 +5,14 @@ body {
     min-height: 100vh;
     margin: 0;
     background-color: #bdf1eb;
+    
 }
 
 h1 {
     font-size: 300%;
     color: #757275;
+}
+
+li {
+    list-style: none;
 }
