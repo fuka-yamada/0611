@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 echo "情報の登録が完了しました。";
@@ -160,4 +161,6 @@ sql;
     $stmt->bindParam(8, $input["prefecture"]);
     $stmt->execute();
 }
+?>
 
+<link rel="stylesheet" href="../CSS/design.css">
