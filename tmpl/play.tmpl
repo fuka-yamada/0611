@@ -1,57 +1,72 @@
 <!--この下に置き換え用の文字列を準備する-->
 
 <!-- レイアウト変更 できる場所-->
+
 <table>
-<tr>
-    <th>入場日：</th>
-    <td>!dat!</td>
-    <th>入場時間：</th>
-    <td>!time!</td>
-    <th>枚数選択:</th>
-    <td>!mai!</td>
-</tr>
+    <tr>
+        <th>入場日：</th>
+        <td>!dat!</td>
+        <th>入場時間：</th>
+        <td>!time!</td>
+        <th>枚数選択:</th>
+        <td>!mai!</td>
+    </tr>
 
-<tr>
-    <th></th>
-    <td></td>
-    <th></th>
-    <td></td>
-</tr>
+    <tr>
+        <th>>購入者氏名：</th>
+        <td>!name!</td>
+        <th>フリガナ：</th>
+        <td>!furi!</td>
+    </tr>
+    <tr>
+        <th>性別：</th>
+        <td>!gender!</td>
+    </tr>
 
-<p>!id!</p>
+    <tr>
+        <th>生年月日:</th>
+        <td>!birthday!</td>
+    </tr>
 
-<p>購入者氏名：!name!</p>
+    <tr>
+        <th>>電話番号：</th>
+        <td>!phone!</td>
+    </tr>
+    <tr>
 
-<P>フリガナ：!furi!</P>
+   
+    <tr>
+        <th>都道府県：</th>
+        <td>!prefecture!</td>
+    </tr>
+    <p>!id!</p>
 
-<p>電話番号：!phone!</p>
-
-<p>性別：!gender!</p>
-
-<p>生年月日:!birthday!</p>
-
-<p>都道府県：!prefecture!</p>
-</tr>
+    </tr>
 </table>
 
 
 
 <table>
-<tr>
-    <td>
-    <form action="kanrisha.php" method="post">
-        <!-- 他のフォーム要素をここに追加 -->
-        <input type="submit" value="削除">
-        <input type="hidden" name="mode" value="delete">
-        <input type="hidden" name="id" value="!id!">
-    </form>
-    </td>
-    <td>
-    <form action="editing.php" method="post">
-        <input type="submit" value="編集">
-        <input type="hidden" name="mode" value="edit">
-        <input type="hidden" name="id" value="!id!">
-    </form>
-    </td>
-</tr>
+    <tr>
+        <td>
+            <form action="kanrisha.php" method="post">
+                <!-- 他のフォーム要素をここに追加 -->
+                <input type="submit" value="削除">
+                <input type="hidden" name="mode" value="delete">
+                <input type="hidden" name="id" value="!id!">
+            </form>
+        </td>
+        <td>
+            <form action="henshu.php" method="post">
+                <input type="submit" value="編集">
+                <input type="hidden" name="mode" value="edit">
+                <input type="hidden" name="id" value="!id!">
+            </form>
+        </td>
+    </tr>
 </table>
+
+
+   
+      
+    

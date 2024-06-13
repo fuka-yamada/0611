@@ -1,4 +1,16 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>編集画面</title>
+     <link rel="stylesheet" href="../CSS/design_kan2.css"> 
+</head>
+
+<body>
 <?php
+
 session_start();
 //nyuryoku.htmlから情報を受け取った。
 $input_dat=$_GET["dat"];
@@ -42,3 +54,5 @@ $kakunin = str_replace("!prefecture!",$input_prefecture,$kakunin);
 
 echo $kakunin;
 
+?>
+</body>

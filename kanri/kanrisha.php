@@ -37,7 +37,10 @@ try {
             delete();
         } elseif ($input["mode"] == "update") {
             update();
-        } 
+    } elseif($input["mode"] == "edit"){
+            edit();
+    }
+
     }
 
     echo "管理者が接続しています。<br>";
@@ -151,4 +154,63 @@ sql;
     echo "データが更新されました。<br>";
     display(); // 更新後に一覧を再表示
 }
+
+function  edit()
+{
+    global $dbh;
+    global $input;
+    
+    $sql = <<<sql
+    UPDATE user SET dat = ?, time = ?, mai = ?, name=?,furi=?,phone=?,gender=?,birthday=?,prefecture=?  WHERE id = ?
+sql;
+    $us = $dbh->prepare($sql);
+    $us->execute();
+
+    // $blockがテキストかつ中身がないことを定義する
+    $block = "";
+
+    // テンプレート
+    $fh = fopen("../kanri/editing.html", "r+"); // 読み込みモード
+    $fs = filesize("../kanri/editing.html"); // ファイルサイズを調べる（のちのfread関数で
+    $kakuni_tmpl = fread($fh, $fs); // ファイルの読み込みを行う
+    fclose($fh);
+
+    while ($row = $us->fetch()) {
+        // 差し込み用テンプレートを初期化する
+        $insert = $kakuni_tmpl;
+
+        // データベースの値を、PHPで使用する値として、変数に入れなおす
+        $dat = $row["dat"];
+        $time = $row["time"];
+        $mai = $row["mai"];
+        $name = $row["name"];
+        $furi = $row["furi"];
+        $phone = $row["phone"];
+        $gender = $row["gender"];
+        $birthday = $row["birthday"];
+        $prefecture = $row["prefecture"];
+        $dbid = $row["id"];
+
+        // テンプレートファイルの文字置き換え
+        $insert = str_replace("!dat!", $dat, $insert);
+        $insert = str_replace("!time!", $time, $insert);
+        $insert = str_replace("!mai!", $mai, $insert);
+        $insert = str_replace("!name!", $name, $insert);
+        $insert = str_replace("!furi!", $furi, $insert);
+        $insert = str_replace("!phone!", $phone, $insert);
+        $insert = str_replace("!gender!", $gender, $insert);
+        $insert = str_replace("!birthday!", $birthday, $insert);
+        $insert = str_replace("!prefecture!", $prefecture, $insert);
+        $insert = str_replace("!id!", $dbid, $insert);
+
+        $block .= $insert; //
+    }
+    
+    // echo "データが更新されました。<br>";
+    // edit(); 
+
+    
+}
+
+
 ?>
