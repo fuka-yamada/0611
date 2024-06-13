@@ -15,6 +15,8 @@ if (isset($_POST)) {
     $origin += $_POST; // $originに処理前のGETデータを入れる
 }
 
+echo $_POST["mode"];
+
 // 文字コードとhtmlエンティティズの処理を繰り返し行う
 foreach ($origin as $key => $value) {
     // 文字コードを処理
@@ -96,6 +98,7 @@ sql;
         $insert = str_replace("!birthday!", $birthday, $insert);
         $insert = str_replace("!prefecture!", $prefecture, $insert);
         $insert = str_replace("!id!", $id, $insert);
+        $insert = str_replace("!na!", $id, $insert);
 
         $block .= $insert; //
     }
