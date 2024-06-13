@@ -1,5 +1,4 @@
 <?php
-session_start();
 echo "予約情報一覧画面表示。<br>";
 
 // データベースへのログイン情報
@@ -8,14 +7,12 @@ $user = "testuser";
 $pass = "testpass";
 
 $origin = []; // ここに、処理前のデータが入る
-if (isset($_SESSION)) {
-    $origin += $_SESSION; // $originに処理前のGETデータを入れる
-}
+
 if (isset($_POST)) {
     $origin += $_POST; // $originに処理前のGETデータを入れる
 }
 
-echo $_POST["mode"];
+//echo $_POST["mode"];
 
 // 文字コードとhtmlエンティティズの処理を繰り返し行う
 foreach ($origin as $key => $value) {
@@ -33,6 +30,7 @@ foreach ($origin as $key => $value) {
 // データベースへ接続
 try {
     $dbh = new PDO($dsn, $user, $pass);
+    //var_dump($input);
 
     if (isset($input["mode"])) {
         if ($input["mode"] == "delete") {
@@ -85,7 +83,7 @@ sql;
         $gender = $row["gender"];
         $birthday = $row["birthday"];
         $prefecture = $row["prefecture"];
-        $id = $row["ID"];
+        $dbid = $row["id"];
 
         // テンプレートファイルの文字置き換え
         $insert = str_replace("!dat!", $dat, $insert);
@@ -97,8 +95,8 @@ sql;
         $insert = str_replace("!gender!", $gender, $insert);
         $insert = str_replace("!birthday!", $birthday, $insert);
         $insert = str_replace("!prefecture!", $prefecture, $insert);
-        $insert = str_replace("!id!", $id, $insert);
-        $insert = str_replace("!na!", $id, $insert);
+        $insert = str_replace("!id!", $dbid, $insert);
+        $insert = str_replace("!na!", $dbid, $insert);
 
         $block .= $insert; //
     }
@@ -120,10 +118,11 @@ function delete()
     global $dbh;
     global $input;
 
+
     // sql文を用意
     $sql = <<<sql
     update user set flag=0 where id=?;
-sql;
+    sql;
 
     $stmt = $dbh->prepare($sql);
 
