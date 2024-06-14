@@ -40,7 +40,7 @@ foreach ($origin as $key => $value) {
 }
 try {
     $dbh = new PDO($dsn, $user, $pass);
-    echo "入力情報変更画面";
+    echo "";
   
    
 } catch (PDOException $e) {

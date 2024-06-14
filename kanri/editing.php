@@ -38,7 +38,7 @@ foreach($origin as $key=>$value){
 try {
     $dbh = new PDO($dsn, $user, $pass);
 
-    echo "編集画面。";
+    echo "入力完了しました。";
     edit();
     echo "<button><a href = 'kanrisha.php'  style='width:60px;height:30px'>戻る</a></button>";
     //register();

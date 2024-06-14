@@ -9,7 +9,10 @@
 </head>
 
 <body>
+    <h1>最終確認フォーム</h1>
 <?php
+
+
 
 session_start();
 //nyuryoku.htmlから情報を受け取った。
