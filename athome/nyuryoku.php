@@ -9,7 +9,8 @@
 </head>
 
 <body>
-    <h1>最終確認フォーム</h1>
+    <section class="check_se">
+    <h1>~最終確認フォーム~</h1>
 <?php
 
 
@@ -58,4 +59,5 @@ $kakunin = str_replace("!prefecture!",$input_prefecture,$kakunin);
 echo $kakunin;
 
 ?>
+    </section>
 </body>

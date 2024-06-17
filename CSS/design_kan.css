@@ -8,11 +8,12 @@ body {
     
 }
 
-h1 {
-    font-size: 300%;
-    color: #757275;
-}
 
 li {
     list-style: none;
+}
+h2{
+    font-size: 300%;
+    color: #757275;
+    text-align: center;
 }

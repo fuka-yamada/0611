@@ -33,6 +33,8 @@ try {
     $dbh = new PDO($dsn, $user, $pass);
 
     echo "ご入力ありがとうございました。";
+    
+    echo "<button><a href = 'top.html'  style='width:60px;height:30px'>戻る</a></button>";
     register();
 } catch (PDOException $e) {
     echo "エラー内容：" .$e->getMessage();

@@ -5,126 +5,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>編集画面</title>
-     <link rel="stylesheet" href="../CSS/design_kan2.css"> 
+    <link rel="stylesheet" href="../CSS/design_kan2.css">
 </head>
 
 <body>
     <form action="editing.php" method="POST">
         <div style="text-align: center">
-        <h1>入力情報変更画面</h1>
-        
-        <p>入場日：</p>
-        <ul class="dat">
-            <input type="radio" name="dat" value="7月13日"  style="width:40px;height:20px">7月13日
-            <input type="radio" name="dat" value="7月14日"  style="width:40px;height:20px">7月14日
-            <input type="radio" name="dat" value="7月15日"  style="width:40px;height:20px">7月15日
-        </ul>
+            <h1>入力情報変更画面</h1>
 
-        <p>入場時間：</p>
-        <ul class="examp">
-            <li><input type="radio" name="time" value="9：00～10：00"  style="width:40px;height:20px">9：00～10：00</li>
-            <li><input type="radio" name="time" value="10：00～11：00"  style="width:40px;height:20px">10：00～11：00</li>
-            <li><input type="radio" name="time" value="11：00～12：00"  style="width:40px;height:20px">11：00～12：00</li>
-            <li><input type="radio" name="time" value="12：00～13：00"  style="width:40px;height:20px">12：00～13：00</li>
-            <li><input type="radio" name="time" value="13：00～14：00"  style="width:40px;height:20px">13：00～14：00</li>
-            <li><input type="radio" name="time" value="14：00～15：00"  style="width:40px;height:20px">14：00～15：00</li>
-            <li><input type="radio" name="time" value="15：00～16：00"  style="width:40px;height:20px">15：00～16：00</li>
-            <li><input type="radio" name="time" value="16：00～17：00" style="width:40px;height:20px">16：00～17：00</li>
-            <li><input type="radio" name="time" value="17：00～18：00"  style="width:40px;height:20px">17：00～18：00</li>
-            <li><input type="radio" name="time" value="18：00～19：00"  style="width:40px;height:20px">18：00～19：00</li>
-            <li><input type="radio" name="time" value="19：00～20：00"  style="width:40px;height:20px">19：00～20：00</li>
+            <p>入場日：</p>
+            <ul class="dat">
+                <input type="radio" name="dat" value="7月13日" style="width:40px;height:20px">7月13日
+                <input type="radio" name="dat" value="7月14日" style="width:40px;height:20px">7月14日
+                <input type="radio" name="dat" value="7月15日" style="width:40px;height:20px">7月15日
+            </ul>
 
-        </ul>
-      
+            <p>入場時間：</p>
+            <ul class="examp">
+                <li><input type="radio" name="time" value="9：00～10：00" style="width:40px;height:20px">9：00～10：00</li>
+                <li><input type="radio" name="time" value="10：00～11：00" style="width:40px;height:20px">10：00～11：00</li>
+                <li><input type="radio" name="time" value="11：00～12：00" style="width:40px;height:20px">11：00～12：00</li>
+                <li><input type="radio" name="time" value="12：00～13：00" style="width:40px;height:20px">12：00～13：00</li>
+                <li><input type="radio" name="time" value="13：00～14：00" style="width:40px;height:20px">13：00～14：00</li>
+                <li><input type="radio" name="time" value="14：00～15：00" style="width:40px;height:20px">14：00～15：00</li>
+                <li><input type="radio" name="time" value="15：00～16：00" style="width:40px;height:20px">15：00～16：00</li>
+                <li><input type="radio" name="time" value="16：00～17：00" style="width:40px;height:20px">16：00～17：00</li>
+                <li><input type="radio" name="time" value="17：00～18：00" style="width:40px;height:20px">17：00～18：00</li>
+                <li><input type="radio" name="time" value="18：00～19：00" style="width:40px;height:20px">18：00～19：00</li>
+                <li><input type="radio" name="time" value="19：00～20：00" style="width:40px;height:20px">19：00～20：00</li>
 
-        <p>枚数選択:</p>
-        <ul class="kazu">
-            <input type="radio" name="mai" value="1枚" style="width:40px;height:20px">1枚
-            <input type="radio" name="mai" value="2枚" style="width:40px;height:20px">2枚
-            <input type="radio" name="mai" value="3枚" style="width:40px;height:20px">3枚
-            <input type="radio" name="mai" value="4枚" style="width:40px;height:20px">4枚
+            </ul>
 
-        </ul>
 
-        <p>購入者氏名：</p>
-        <input type="text" name="name" id="name" value="!name!">
+            <p>枚数選択:</p>
+            <ul class="kazu">
+                <input type="radio" name="mai" value="1枚" style="width:40px;height:20px">1枚
+                <input type="radio" name="mai" value="2枚" style="width:40px;height:20px">2枚
+                <input type="radio" name="mai" value="3枚" style="width:40px;height:20px">3枚
+                <input type="radio" name="mai" value="4枚" style="width:40px;height:20px">4枚
 
-        <P>フリガナ：</P>
-        <input type="text" name="furi" id="furi" value="!furi!">
+            </ul>
 
-        <p>生年月日:</p>
-        <input type="date" name="birthday" id="birthday" value="!birthday!">
+            <p>購入者氏名：</p>
+            <input type="text" name="name" id="name" value="!name!">
 
-        <p>性別：</p>
-        <td><input type="radio" name="gender" value="女" style="width:40px;height:20px"> 女
-            <input type="radio" name="gender" value="男" style="width:40px;height:20px"> 男
+            <P>フリガナ：</P>
+            <input type="text" name="furi" id="furi" value="!furi!">
+
+            <p>生年月日:</p>
+            <input type="date" name="birthday" id="birthday" value="!birthday!">
+
+            <p>性別：</p>
+            <td><input type="radio" name="gender" value="女" style="width:40px;height:20px"> 女
+                <input type="radio" name="gender" value="男" style="width:40px;height:20px"> 男
+            </td>
+
+            <p>電話番号：</p>
+            <input type="text" name="phone" id="phone" value="!phone!">
+
+            <p>都道府県：</p>
+            <td>
+                <select style="width:10%; height:20px;" name="prefecture">
+                    <option value="北海道">北海道</option>
+                    <option value="青森県">青森県</option>
+                    <option value="岩手県">岩手県</option>
+                    <option value="宮城県">宮城県</option>
+                    <option value="秋田県">秋田県</option>
+                    <option value="山形県">山形県</option>
+                    <option value="福島県">福島県</option>
+                    <option value="茨城県">茨城県</option>
+                    <option value="栃木県">栃木県</option>
+                    <option value="群馬県">群馬県</option>
+                    <option value="埼玉県">埼玉県</option>
+                    <option value="千葉県">千葉県</option>
+                    <option value="東京都">東京都</option>
+                    <option value="神奈川県">神奈川県</option>
+                    <option value="新潟県">新潟県</option>
+                    <option value="富山県">富山県</option>
+                    <option value="石川県">石川県</option>
+                    <option value="福井県">福井県</option>
+                    <option value="山梨県">山梨県</option>
+                    <option value="長野県">長野県</option>
+                    <option value="岐阜県">岐阜県</option>
+                    <option value="静岡県">静岡県</option>
+                    <option value="愛知県">愛知県</option>
+                    <option value="三重県">三重県</option>
+                    <option value="滋賀県">滋賀県</option>
+                    <option value="京都府">京都府</option>
+                    <option value="大阪府">大阪府</option>
+                    <option value="兵庫県">兵庫県</option>
+                    <option value="奈良県">奈良県</option>
+                    <option value="和歌山県">和歌山県</option>
+                    <option value="鳥取県">鳥取県</option>
+                    <option value="島根県">島根県</option>
+                    <option value="岡山県">岡山県</option>
+                    <option value="広島県">広島県</option>
+                    <option value="山口県">山口県</option>
+                    <option value="徳島県">徳島県</option>
+                    <option value="香川県">香川県</option>
+                    <option value="愛媛県">愛媛県</option>
+                    <option value="高知県">高知県</option>
+                    <option value="福岡県">福岡県</option>
+                    <option value="佐賀県">佐賀県</option>
+                    <option value="長崎県">長崎県</option>
+                    <option value="熊本県">熊本県</option>
+                    <option value="大分県">大分県</option>
+                    <option value="宮崎県">宮崎県</option>
+                    <option value="鹿児島県">鹿児島県</option>
+                    <option value="沖縄県">沖縄県</option>
+        </div>
+        </select>
         </td>
 
-        <p>電話番号：</p>
-        <input type="text" name="phone" id="phone" value="!phone!">
-
-        <p>都道府県：</p>
-        <td>
-            <select style="width:10%; height:20px;" name="prefecture">
-                <option value="北海道">北海道</option>
-                <option value="青森県">青森県</option>
-                <option value="岩手県">岩手県</option>
-                <option value="宮城県">宮城県</option>
-                <option value="秋田県">秋田県</option>
-                <option value="山形県">山形県</option>
-                <option value="福島県">福島県</option>
-                <option value="茨城県">茨城県</option>
-                <option value="栃木県">栃木県</option>
-                <option value="群馬県">群馬県</option>
-                <option value="埼玉県">埼玉県</option>
-                <option value="千葉県">千葉県</option>
-                <option value="東京都">東京都</option>
-                <option value="神奈川県">神奈川県</option>
-                <option value="新潟県">新潟県</option>
-                <option value="富山県">富山県</option>
-                <option value="石川県">石川県</option>
-                <option value="福井県">福井県</option>
-                <option value="山梨県">山梨県</option>
-                <option value="長野県">長野県</option>
-                <option value="岐阜県">岐阜県</option>
-                <option value="静岡県">静岡県</option>
-                <option value="愛知県">愛知県</option>
-                <option value="三重県">三重県</option>
-                <option value="滋賀県">滋賀県</option>
-                <option value="京都府">京都府</option>
-                <option value="大阪府">大阪府</option>
-                <option value="兵庫県">兵庫県</option>
-                <option value="奈良県">奈良県</option>
-                <option value="和歌山県">和歌山県</option>
-                <option value="鳥取県">鳥取県</option>
-                <option value="島根県">島根県</option>
-                <option value="岡山県">岡山県</option>
-                <option value="広島県">広島県</option>
-                <option value="山口県">山口県</option>
-                <option value="徳島県">徳島県</option>
-                <option value="香川県">香川県</option>
-                <option value="愛媛県">愛媛県</option>
-                <option value="高知県">高知県</option>
-                <option value="福岡県">福岡県</option>
-                <option value="佐賀県">佐賀県</option>
-                <option value="長崎県">長崎県</option>
-                <option value="熊本県">熊本県</option>
-                <option value="大分県">大分県</option>
-                <option value="宮崎県">宮崎県</option>
-                <option value="鹿児島県">鹿児島県</option>
-                <option value="沖縄県">沖縄県</option>
-            </div>
-            </select>
-        </td>
-      
 
         <br>
         <br>
-        <button type="button" onclick="history.back()" style="width:60px;height:30px">戻る</button>
-       <input type="submit" value="変更">
-       <input type="hidden" name="mode" value="edit">
-       <input type="hidden" name="id" value="!id!">
-        
+
+        <p class="flex" style="text-align:center">
+            <button href="#" class="btn-flat-border" type="button" onclick="history.back()" style="width:60px;height:30px">戻る</button>
+            <input href="#" class="btn-flat-border" type="submit" value="変更">
+            <input type="hidden" name="mode" value="edit">
+            <input type="hidden" name="id" value="!id!">
+        </p>
     </form>
 </body>
 
